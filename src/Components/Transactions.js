@@ -6,8 +6,9 @@ class Transactions extends Component{
     render(){
         return(
             <div className = "transactions">
-                <AddPaymentForm addPayment = {this.props.addPayment} personList = {this.props.personList}/>
-                <PaymentInfoCard paymentList = {this.props.paymentList}/>
+                <AddPaymentForm addPayment = {this.props.addPayment} personList = {this.props.personList}
+                    availableId = {this.props.availableId}/>
+                <PaymentInfoCard paymentList = {this.props.paymentList} deletePayment = {this.props.deletePayment}/>
             </div>
         );
     }
