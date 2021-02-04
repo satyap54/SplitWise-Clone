@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
 	root: {
@@ -53,13 +54,19 @@ function PaymentInfoCard(props) {
 											Paid by : 
 										</Box>{payment.paidBy}
 										</Typography>
+										<Button variant="contained" color="secondary" size = "small" disableElevation
+											style = {{ width: '20px', marginTop: '10px',}}
+											onClick = {()=> props.deletePayment(payment.id)}
+										>
+											Remove
+										</Button>
+
 									</CardContent>
 								</Card>
 							</Grid>
 						);
 					}
 				);
-		// console.log(renderList);
 		return renderList;
 	}
 
