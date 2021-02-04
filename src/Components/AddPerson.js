@@ -13,6 +13,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
 
+
 class AddPerson extends Component{
 	state = {
 		name : null,
@@ -48,6 +49,12 @@ class AddPerson extends Component{
 									<Typography variant = "h5" component = "h2">
 										{person.name}
 									</Typography>
+									<Button variant="contained" color="secondary" size = "small" disableElevation
+											style = {{ width: '20px', marginTop: '10px',}}
+											onClick = {()=> this.props.deletePerson(person.name)}
+									>
+										Remove
+									</Button>
 								</CardContent>
 							</Card>
 						</Grid>
