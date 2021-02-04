@@ -17,7 +17,7 @@ class AddPaymentForm extends Component{
 			return;
 
 		console.log(amount, paidAt, paidBy);
-		let ob = new Payment(amount, paidAt, paidBy, paidOn, description);
+		let ob = new Payment(amount, paidAt, paidBy, paidOn, description, this.props.availableId);
 		this.props.addPayment(ob);
 	}
 
