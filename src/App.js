@@ -69,6 +69,7 @@ class App extends Component{
 		personList : [],
 		paymentList : [],
 		numberOfPeople : 0,
+		availableId : 0,
 	}
 
 	addPersonToState = (newPerson)=>{
@@ -80,10 +81,44 @@ class App extends Component{
 
 	addPayment = (obj)=>{
         this.setState({
-            paymentList : [...(this.state.paymentList), obj],
+			paymentList : [...(this.state.paymentList), obj],
+			availableId : (obj.id + 1),
         })
 	}
 	
+	deletePerson = (name)=>{
+		let newPersonList = [], newPaymentList = [];
+		(this.state.personList).forEach(person => {
+			if(person.name !== name)
+				newPersonList.push(person);
+		});
+
+		(this.state.paymentList).forEach(payment => {
+			if(payment.paidBy !== name)
+				newPaymentList.push(payment);
+		});
+
+		let n = this.state.numberOfPeople - 1;
+		this.setState({
+			personList : newPersonList,
+			paymentList : newPaymentList,
+			numberOfPeople : n,
+		})
+	}
+
+	deletePayment = (id)=>{
+		let newPaymentList = [];
+		console.log("delete id", id);
+		(this.state.paymentList).forEach(payment => {
+			if(payment.id !== id)
+				newPaymentList.push(payment);
+		});
+
+		this.setState({
+			paymentList : newPaymentList,
+		});
+	}
+
   	render(){
 		const {classes} = this.props;
 		return (
@@ -167,12 +202,14 @@ class App extends Component{
 						<Route exact path = "/transactions"
 								render = { (props)=>(
 									<Transactions addPayment = {this.addPayment}
-										paymentList = {this.state.paymentList} personList = {this.state.personList}/>
+										paymentList = {this.state.paymentList} personList = {this.state.personList}
+										availableId = {this.state.availableId} deletePayment = {this.deletePayment}/>
 								)}
 						/>
 						<Route exact path = "/add" 
 								render = { (props) =>(
 									<AddPerson addPerson = {this.addPersonToState} 
+										deletePerson = {this.deletePerson}
 										numberOfPeople = {this.state.numberOfPeople} personList = {this.state.personList}/>
 								)}
 						/>
